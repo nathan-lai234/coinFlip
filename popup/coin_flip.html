@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="coin_flip.css" />
+  </head>
+
+  <body>
+    <div id="popup_content">
+      <div id="setting_bar">
+        <img id="setting_icon" />
+      </div>
+      <div id="coin">
+        <div class="heads_wrapper coin_flip">
+          <img class="heads_image coin_flip" />
+        </div>
+        <div class="tails_wrapper coin_flip">
+          <img class="tails_image coin_flip" />
+        </div>
+      </div>
+      <div className="center_text">
+        <p id="coin_result">...</p>
+      </div>
+      <div class="button select">Select Locations</div>
+      <div class="button flip coin_flip">Flip!</div>
+    </div>
+    <div id="error_content" class="hidden">
+      <p>Can not coin flip on this page :C</p>
+    </div>
+    <script src="coin_flip.js"></script>
+  </body>
+</html>

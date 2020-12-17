@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "CoinFlip",
+  "version": "1.0",
+
+  "description": "Let a coin flip decide your action!",
+  "homepage_url": "https://github.com/NathanLaiDevv/CoinFlip",
+  "icons": {
+    "48": "icons/coin_toss.svg"
+  },
+
+  "permissions": ["activeTab", "storage"],
+
+  "browser_action": {
+    "default_icon": "icons/coin_toss.svg",
+    "default_title": "CoinFlip",
+    "default_popup": "popup/coin_flip.html"
+  },
+
+  "options_ui": {
+    "page": "settings/options.html"
+  },
+
+  "web_accessible_resources": ["overlay_style.css"]
+}

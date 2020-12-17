@@ -1,0 +1,143 @@
+html,
+body {
+  width: 300px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+#setting_bar {
+  display: flex;
+  justify-content: end;
+  height: 29px;
+  width: 300px;
+  cursor: pointer;
+}
+
+#setting_icon {
+  height: 25px;
+  width: 25px;
+  margin: 2px 2px 0 0;
+}
+
+#setting_icon:hover {
+  filter: invert(45%) sepia(3%) saturate(0%) hue-rotate(208deg) brightness(85%)
+    contrast(100%);
+}
+
+/* COIN CSS 
+  base of the animation shamelessy taken 
+  from this saviour https://codepen.io/seligmar/pen/RwPNQOd
+*/
+
+#coin {
+  position: relative;
+  margin: 70px auto 30px auto;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+
+  transition: -webkit-transform 1s ease-in;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+#coin div {
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
+    0 12px 20px -10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
+    0 12px 20px -10px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 45px rgba(255, 255, 255, 0.3),
+    0 12px 20px -10px rgba(0, 0, 0, 0.4);
+
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.heads_wrapper {
+  background-color: blue;
+  z-index: 100;
+}
+
+.tails_wrapper {
+  background-color: red;
+  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+}
+
+#coin.heads_wrapper {
+  -webkit-animation: flipHeads 3s ease-out forwards;
+  -moz-animation: flipHeads 3s ease-out forwards;
+  -o-animation: flipHeads 3s ease-out forwards;
+  animation: flipHeads 3s ease-out forwards;
+}
+
+#coin.tails_wrapper {
+  -webkit-animation: flipTails 3s ease-out forwards;
+  -moz-animation: flipTails 3s ease-out forwards;
+  -o-animation: flipTails 3s ease-out forwards;
+  animation: flipTails 3s ease-out forwards;
+}
+
+@keyframes flipHeads {
+  from {
+    -webkit-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  to {
+    -webkit-transform: rotateY(1800deg);
+    -moz-transform: rotateY(1800deg);
+    transform: rotateY(1800deg);
+  }
+}
+@keyframes flipTails {
+  from {
+    -webkit-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  to {
+    -webkit-transform: rotateY(1980deg);
+    -moz-transform: rotateY(1980deg);
+    transform: rotateY(1980deg);
+  }
+}
+
+.center_text {
+  display: flex;
+  justify-content: center;
+}
+
+#coin_result {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.button {
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.flip:hover {
+  background-color: #cff2f2;
+}
+
+.flip {
+  background-color: #e5f2f2;
+}

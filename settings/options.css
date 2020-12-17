@@ -1,0 +1,30 @@
+html,
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.formRow {
+  /* display: flex;
+  align-items: center; */
+  padding: 10px 10px;
+}
+
+.labelInput {
+  font-size: 1.3em;
+}
+
+.hexInput {
+  width: 70%;
+  padding: 10px;
+}
+
+.colorDisplay {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid black;
+  background-color: red;
+}
