@@ -67,12 +67,12 @@ body {
 }
 
 .heads_wrapper {
-  background-color: blue;
+  /* background-color: blue; */
   z-index: 100;
 }
 
 .tails_wrapper {
-  background-color: red;
+  /* background-color: red; */
   transform: rotateY(-180deg);
   -webkit-transform: rotateY(-180deg);
 }

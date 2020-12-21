@@ -7,20 +7,42 @@
   </head>
 
   <body>
-    <form id="optionForm">
-      <div class="formRow">
-        <h2 class="labelInput"
-          >Heads color
-        </label>
-        <div class="hexInputWrapper">
-          <input type="text" id="heads_color" class="hexInput"  />
-          <div class="colorDisplay"></div>
+    <form id="option_form">
+      <!-- Heads Row -->
+      <div class="form_row">
+        <div classs="input_header_wrapper">
+          <h2 class="input_header">Heads color</h2>
+          <p id="heads_input_error" class="input_error"></p>
+        </div>
+        <div class="input_wrapper">
+          <p class="input_hashtag">#</p>
+          <input
+            type="text"
+            id="heads_color"
+            class="hex_input"
+            placeholder="0000FF"
+            maxlength="6"
+          />
+          <div id="heads_color_display" class="color_display"></div>
         </div>
       </div>
-      <div class="formRow">
-        <label class="labelInput"
-          >Tails color<input type="text" id="tails_color" class="hexInput"
-        /></label>
+      <!-- Tails Row -->
+      <div class="form_row">
+        <div classs="input_header_wrapper">
+          <h2 class="input_header">Tails color</h2>
+          <p id="tails_input_error" class="input_error"></p>
+        </div>
+        <div class="input_wrapper">
+          <p class="input_hashtag">#</p>
+          <input
+            type="text"
+            id="tails_color"
+            class="hex_input"
+            placeholder="FF0000"
+            maxlength="6"
+          />
+          <div id="tails_color_display" class="color_display"></div>
+        </div>
       </div>
       <button type="submit">Save</button>
     </form>

@@ -4,13 +4,8 @@
 
   if (!window.hasRun) {
     createOverlay();
-
   }
-
   window.hasRun = true;
-
-
-
 
   /**
    * Overlay

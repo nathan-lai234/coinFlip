@@ -8,6 +8,32 @@ const Coin = Object.freeze({ heads: 0, tails: 1 });
 let animationTime = 3000;
 
 /**
+ * Set Coin Style
+ */
+
+//Default coin colours
+let headsColor = "#0000ff";
+let tailsColor = "#ff0000";
+
+function setCoinColor(result) {
+  headsColor = result.headsColor;
+  tailsColor = result.tailsColor;
+  document.getElementById("coin_result").innerHTML = result.headsColor;
+
+  let headsWrapper = document.getElementsByClassName("heads_wrapper");
+  headsWrapper[0].style.backgroundColor = headsColor;
+  let tailsWrapper = document.getElementsByClassName("tails_wrapper");
+  tailsWrapper[0].style.backgroundColor = tailsColor;
+}
+
+function onError(error) {
+  console.log(`Error ${error}`);
+}
+
+let heads_color = browser.storage.sync.get(["headsColor", "tailsColor"]);
+heads_color.then(setCoinColor, onError);
+
+/**
  * List for a click on the buttons on the popup,
  * send a message to the content script on the page
  */
