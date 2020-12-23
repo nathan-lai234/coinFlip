@@ -7,6 +7,32 @@ body {
   padding: 10px 10px;
 }
 
+.hr_form {
+  color: #b4b4b4;
+}
+
+.cointype {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cointype + img {
+  cursor: pointer;
+}
+
+.cointype:checked + img {
+  outline: 2px solid #f00;
+}
+
+.cointype_image {
+  display: block;
+  margin: 0 auto 10px auto;
+  width: 400px;
+  height: 200px;
+}
+
 .input_header_wrapper {
   display: flex;
   flex-direction: row;

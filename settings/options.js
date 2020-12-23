@@ -1,3 +1,8 @@
+//Load images for coins
+document.getElementById("image_aus1").src = "/icons/aus1.png";
+document.getElementById("image_jap5").src = "/icons/jap5.png";
+document.getElementById("image_usa5").src = "/icons/usa5.png";
+
 //Default colour values
 const defaultHeadsColor = "0000ff";
 const defaultTailsColor = "ff0000";
@@ -78,23 +83,69 @@ function changeTailsColorIndicator(e) {
   }
 }
 
+function hideCointypeOptions() {
+  const coin = document.getElementById("coinface_coin");
+  const coinRow = document.getElementById("form_cointype");
+  const headsColor = document.getElementById("form_heads_color");
+  const tailsColor = document.getElementById("form_tails_color");
+  if (coin.checked) {
+    coinRow.style.display = "block";
+    headsColor.style.display = "none";
+    tailsColor.style.display = "none";
+  } else {
+    coinRow.style.display = "none";
+    headsColor.style.display = "block";
+    tailsColor.style.display = "block";
+  }
+}
+
 //On submit click
 function saveOptions(e) {
   e.preventDefault();
+
+  //Reset ui
   removeAllStyleErrors();
   if (!validForm()) return;
+
+  let cointype = document.getElementsByName("cointype");
+  let cointypeId;
+  let cointypeValue;
+  for (var i = 0; i < cointype.length; i++) {
+    if (cointype[i].checked) {
+      cointypeValue = cointype[i].value;
+      cointypeId = cointype[i].id;
+      break;
+    }
+  }
 
   let newHeadsColor = getHexcode(document.getElementById("heads_color").value);
   let newTailsColor = getHexcode(document.getElementById("tails_color").value);
 
   browser.storage.sync.set({
-    headsColor: newHeadsColor,
+    coinfaceCoin: document.getElementById("coinface_coin").checked,
+    coinfaceColor: document.getElementById("coinface_color").checked,
     tailsColor: newTailsColor,
+    headsColor: newHeadsColor,
+    cointypeValue: cointypeValue,
+    cointypeId: cointypeId,
   });
 }
 
 //On first load
 function restoreOptions() {
+  function setCoinStyle(result) {
+    document.getElementById("coinface_coin").checked =
+      result.coinfaceCoin || true;
+    document.getElementById("coinface_color").checked =
+      result.coinfaceColor || false;
+    hideCointypeOptions();
+    if (result.cointypeId != undefined) {
+      document.getElementById(result.cointypeId).checked = true;
+    } else {
+      document.getElementById(cointype_aus1).checked = true;
+    }
+  }
+
   function setHeadColor(result) {
     document.getElementById("heads_color").value =
       result.headsColor.substring(1) || defaultHeadsColor;
@@ -110,8 +161,15 @@ function restoreOptions() {
     console.log(`Error ${error}`);
   }
 
-  let heads_color = browser.storage.sync.get(["headsColor", "tailsColor"]);
-  heads_color.then(setHeadColor, onError);
+  const coinfaceRadio = browser.storage.sync.get([
+    "coinfaceCoin",
+    "coinfaceColor",
+    "cointypeId",
+  ]);
+  coinfaceRadio.then(setCoinStyle, onError);
+
+  const colorSettings = browser.storage.sync.get(["headsColor", "tailsColor"]);
+  colorSettings.then(setHeadColor, onError);
 }
 
 document
@@ -120,5 +178,12 @@ document
 document
   .getElementById("tails_color")
   .addEventListener("input", changeTailsColorIndicator);
+
+document
+  .getElementById("coinface_coin")
+  .addEventListener("click", hideCointypeOptions);
+document
+  .getElementById("coinface_color")
+  .addEventListener("click", hideCointypeOptions);
 document.addEventListener("DOMContentLoaded", restoreOptions);
 document.querySelector("form").addEventListener("submit", saveOptions);

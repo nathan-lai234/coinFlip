@@ -15,23 +15,54 @@ let animationTime = 3000;
 let headsColor = "#0000ff";
 let tailsColor = "#ff0000";
 
+function setCoinfaceRadio(result) {
+  if (result.coinfaceCoin) {
+    //If coin selected
+    document.getElementsByClassName("heads_wrapper")[0].style.visibility =
+      "hidden";
+    document.getElementsByClassName("tails_wrapper")[0].style.visibility =
+      "hidden";
+    document.getElementById("heads_image").style.visibility = "visible";
+    document.getElementById("tails_image").style.visibility = "visible";
+  } else {
+    //If color selected
+    document.getElementsByClassName("heads_wrapper")[0].style.visibility =
+      "visible";
+    document.getElementsByClassName("tails_wrapper")[0].style.visibility =
+      "visible";
+    document.getElementById("heads_image").style.visibility = "hidden";
+    document.getElementById("tails_image").style.visibility = "hidden";
+  }
+}
+
+function setCoinType(result) {
+  document.getElementById("heads_image").src =
+    "/icons/" + result.cointypeValue + "_heads.png";
+  document.getElementById("tails_image").src =
+    "/icons/" + result.cointypeValue + "_tails.png";
+}
+
 function setCoinColor(result) {
   headsColor = result.headsColor;
   tailsColor = result.tailsColor;
-  document.getElementById("coin_result").innerHTML = result.headsColor;
 
   let headsWrapper = document.getElementsByClassName("heads_wrapper");
   headsWrapper[0].style.backgroundColor = headsColor;
   let tailsWrapper = document.getElementsByClassName("tails_wrapper");
   tailsWrapper[0].style.backgroundColor = tailsColor;
 }
-
 function onError(error) {
   console.log(`Error ${error}`);
 }
 
-let heads_color = browser.storage.sync.get(["headsColor", "tailsColor"]);
-heads_color.then(setCoinColor, onError);
+let coinfaceRadio = browser.storage.sync.get("coinfaceCoin");
+coinfaceRadio.then(setCoinfaceRadio, onError);
+
+let coinType = browser.storage.sync.get("cointypeValue");
+coinType.then(setCoinType, onError);
+
+let coinColor = browser.storage.sync.get(["headsColor", "tailsColor"]);
+coinColor.then(setCoinColor, onError);
 
 /**
  * List for a click on the buttons on the popup,
@@ -74,27 +105,6 @@ function listenForClicks() {
       return coinSide;
     }
 
-    function flipButton(tabs) {
-      randNum = flipCoin();
-      // browser.tabs
-      //   .sendMessage(tabs[0].id, {
-      //     command: "getCoordinates",
-      //   })
-      //   .then((response) => {
-      //     browser.tabs.sendMessage(tabs[0].id, {
-      //       command: "flip",
-      //       posX: response.coords[randNum].posX,
-      //       posY: response.coords[randNum].posY,
-      //     });
-      //   });
-    }
-
-    function selectLocations(tabs) {
-      browser.tabs.sendMessage(tabs[0].id, {
-        command: "select",
-      });
-    }
-
     /**
      * Log the error into the console
      */
@@ -111,7 +121,7 @@ function listenForClicks() {
     if (e.target.classList.contains("coin_flip")) {
       browser.tabs
         .query({ active: true, currentWindow: true })
-        .then(flipButton)
+        .then(flipCoin)
         .catch(reportError);
     } else if (e.target.classList.contains("select")) {
       browser.tabs
@@ -134,3 +144,21 @@ browser.tabs
   .executeScript({ file: "/content_scripts/click_page.js" })
   .then(listenForClicks)
   .catch(reportExecuteScriptError);
+
+// browser.tabs
+//   .sendMessage(tabs[0].id, {
+//     command: "getCoordinates",
+//   })
+//   .then((response) => {
+//     browser.tabs.sendMessage(tabs[0].id, {
+//       command: "flip",
+//       posX: response.coords[randNum].posX,
+//       posY: response.coords[randNum].posY,
+//     });
+//   });
+
+// function selectLocations(tabs) {
+//   browser.tabs.sendMessage(tabs[0].id, {
+//     command: "select",
+//   });
+// }

@@ -8,8 +8,65 @@
 
   <body>
     <form id="option_form">
-      <!-- Heads Row -->
+      <!-- Select Coin Style -->
       <div class="form_row">
+        <h2>Select Coin Style</h2>
+        <input
+          type="radio"
+          id="coinface_coin"
+          name="coinface_radio"
+          value="coin"
+        />
+        <label for="coinface_coin">Coin</label>
+        <input
+          type="radio"
+          id="coinface_color"
+          name="coinface_radio"
+          value="coin"
+        />
+        <label for="coinface_color">Color</label>
+      </div>
+      <hr class="hr_form" />
+
+      <!-- Select Coin Type -->
+      <div id="form_cointype" class="form-row">
+        <h2>Australian $1</h2>
+        <label>
+          <input
+            type="radio"
+            id="cointype_aus1"
+            class="cointype"
+            name="cointype"
+            value="aus1"
+          />
+          <img id="image_aus1" class="cointype_image" />
+        </label>
+        <h2>Japan 5¥</h2>
+        <label>
+          <input
+            type="radio"
+            id="cointype_jap5"
+            class="cointype"
+            name="cointype"
+            value="jap5"
+          />
+          <img id="image_jap5" class="cointype_image" />
+        </label>
+        <h2>United States Nickel</h2>
+        <label>
+          <input
+            type="radio"
+            id="cointype_usa5"
+            class="cointype"
+            name="cointype"
+            value="usa5"
+          />
+          <img id="image_usa5" class="cointype_image" />
+        </label>
+      </div>
+
+      <!-- Color Heads Row -->
+      <div id="form_heads_color" class="form_row">
         <div classs="input_header_wrapper">
           <h2 class="input_header">Heads color</h2>
           <p id="heads_input_error" class="input_error"></p>
@@ -26,8 +83,9 @@
           <div id="heads_color_display" class="color_display"></div>
         </div>
       </div>
-      <!-- Tails Row -->
-      <div class="form_row">
+
+      <!-- Color Tails Row -->
+      <div id="form_tails_color" class="form_row">
         <div classs="input_header_wrapper">
           <h2 class="input_header">Tails color</h2>
           <p id="tails_input_error" class="input_error"></p>
@@ -44,6 +102,9 @@
           <div id="tails_color_display" class="color_display"></div>
         </div>
       </div>
+
+      <hr class="hr_form" />
+
       <button type="submit">Save</button>
     </form>
 

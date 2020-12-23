@@ -66,9 +66,12 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
-.heads_wrapper {
-  /* background-color: blue; */
-  z-index: 100;
+.coin_image {
+  width: 200px;
+  height: 200px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
 }
 
 .tails_wrapper {
@@ -78,16 +81,10 @@ body {
 }
 
 #coin.heads_wrapper {
-  -webkit-animation: flipHeads 3s ease-out forwards;
-  -moz-animation: flipHeads 3s ease-out forwards;
-  -o-animation: flipHeads 3s ease-out forwards;
   animation: flipHeads 3s ease-out forwards;
 }
 
 #coin.tails_wrapper {
-  -webkit-animation: flipTails 3s ease-out forwards;
-  -moz-animation: flipTails 3s ease-out forwards;
-  -o-animation: flipTails 3s ease-out forwards;
   animation: flipTails 3s ease-out forwards;
 }
 
