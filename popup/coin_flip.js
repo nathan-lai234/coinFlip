@@ -36,10 +36,15 @@ function setCoinfaceRadio(result) {
 }
 
 function setCoinType(result) {
-  document.getElementById("heads_image").src =
-    "/icons/" + result.cointypeValue + "_heads.png";
-  document.getElementById("tails_image").src =
-    "/icons/" + result.cointypeValue + "_tails.png";
+  if (result.cointypeValue === null) {
+    document.getElementById("heads_image").src = "/icons/aus1_heads.png";
+    document.getElementById("tails_image").src = "/icons/aus1_tails.png";
+  } else {
+    document.getElementById("heads_image").src =
+      "/icons/" + result.cointypeValue + "_heads.png";
+    document.getElementById("tails_image").src =
+      "/icons/" + result.cointypeValue + "_tails.png";
+  }
 }
 
 function setCoinColor(result) {
@@ -51,6 +56,7 @@ function setCoinColor(result) {
   let tailsWrapper = document.getElementsByClassName("tails_wrapper");
   tailsWrapper[0].style.backgroundColor = tailsColor;
 }
+
 function onError(error) {
   console.log(`Error ${error}`);
 }
@@ -80,29 +86,26 @@ function listenForClicks() {
       const coinSide = Math.floor(Math.random() * 2);
 
       // Give class to coin div to start animation (with a 0.1 second delay)
+      document.getElementById("coin_result").innerHTML = "---";
       const coin = document.getElementById("coin");
       coin.classList.remove("heads_wrapper");
       coin.classList.remove("tails_wrapper");
       setTimeout(function () {
         if (coinSide === Coin.heads) {
           coin.classList.add("heads_wrapper");
-          document.getElementById("debug").innerHTML = "heads";
         } else {
           coin.classList.add("tails_wrapper");
-          document.getElementById("debug").innerHTML = "tails";
         }
       }, 100);
 
       // Display text of the outcome after the animation completes
       setTimeout(function () {
-        if (randNum == 0) {
+        if (coinSide === Coin.heads) {
           document.getElementById("coin_result").innerHTML = "Heads";
         } else {
           document.getElementById("coin_result").innerHTML = "Tails";
         }
       }, animationTime + 300);
-
-      return coinSide;
     }
 
     /**

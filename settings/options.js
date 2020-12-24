@@ -139,10 +139,13 @@ function restoreOptions() {
     document.getElementById("coinface_color").checked =
       result.coinfaceColor || false;
     hideCointypeOptions();
-    if (result.cointypeId != undefined) {
-      document.getElementById(result.cointypeId).checked = true;
+  }
+
+  function setCointype(result) {
+    if (result.cointypeId === null) {
+      document.getElementById("cointype_aus1").checked = true;
     } else {
-      document.getElementById(cointype_aus1).checked = true;
+      document.getElementById(result.cointypeId).checked = true;
     }
   }
 
@@ -164,9 +167,11 @@ function restoreOptions() {
   const coinfaceRadio = browser.storage.sync.get([
     "coinfaceCoin",
     "coinfaceColor",
-    "cointypeId",
   ]);
   coinfaceRadio.then(setCoinStyle, onError);
+
+  const cointype = browser.storage.sync.get("cointypeId");
+  cointype.then(setCointype, onError);
 
   const colorSettings = browser.storage.sync.get(["headsColor", "tailsColor"]);
   colorSettings.then(setHeadColor, onError);
