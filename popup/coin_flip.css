@@ -131,10 +131,11 @@ body {
   cursor: pointer;
 }
 
-.flip:hover {
-  background-color: #cff2f2;
+.flip_button {
+  border-radius: 5px;
+  background-color: #e5f2f2;
 }
 
-.flip {
-  background-color: #e5f2f2;
+.flip_button:hover {
+  background-color: #cff2f2;
 }

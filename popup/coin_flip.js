@@ -7,15 +7,16 @@ const Coin = Object.freeze({ heads: 0, tails: 1 });
 //How long the animation time is default is 3 seconds
 let animationTime = 3000;
 
-/**
- * Set Coin Style
- */
-
 //Default coin colours
 let headsColor = "#0000ff";
 let tailsColor = "#ff0000";
 
-function setCoinfaceRadio(result) {
+/*
+  ++++++++++    Load coin setting     ++++++++++
+*/
+
+//Display either the colour or an actual coin as a display for the coin flip
+function setCoinStyle(result) {
   if (result.coinfaceCoin) {
     //If coin selected
     document.getElementsByClassName("heads_wrapper")[0].style.visibility =
@@ -35,10 +36,11 @@ function setCoinfaceRadio(result) {
   }
 }
 
+//Set which coin is displayed in the image
 function setCoinType(result) {
   if (result.cointypeValue === null) {
-    document.getElementById("heads_image").src = "/icons/aus1_heads.png";
-    document.getElementById("tails_image").src = "/icons/aus1_tails.png";
+    document.getElementById("heads_image").src = "/icons/euro2_heads.png";
+    document.getElementById("tails_image").src = "/icons/euro2_tails.png";
   } else {
     document.getElementById("heads_image").src =
       "/icons/" + result.cointypeValue + "_heads.png";
@@ -47,6 +49,7 @@ function setCoinType(result) {
   }
 }
 
+//Set the color of the coin
 function setCoinColor(result) {
   headsColor = result.headsColor;
   tailsColor = result.tailsColor;
@@ -61,8 +64,9 @@ function onError(error) {
   console.log(`Error ${error}`);
 }
 
+//Get settings from storage set in the options page
 let coinfaceRadio = browser.storage.sync.get("coinfaceCoin");
-coinfaceRadio.then(setCoinfaceRadio, onError);
+coinfaceRadio.then(setCoinStyle, onError);
 
 let coinType = browser.storage.sync.get("cointypeValue");
 coinType.then(setCoinType, onError);
@@ -126,42 +130,10 @@ function listenForClicks() {
         .query({ active: true, currentWindow: true })
         .then(flipCoin)
         .catch(reportError);
-    } else if (e.target.classList.contains("select")) {
-      browser.tabs
-        .query({ active: true, currentWindow: true })
-        .then(selectLocations)
-        .catch(reportError);
     } else if (e.target.id === "setting_icon") {
       browser.runtime.openOptionsPage();
     }
   });
 }
 
-function reportExecuteScriptError(error) {
-  document.querySelector("#popup_content").classList.add("hidden");
-  document.querySelector("#error_content").classList.remove("hidden");
-  console.error(`Failed to execute coinFlip content script: ${error.message}`);
-}
-
-browser.tabs
-  .executeScript({ file: "/content_scripts/click_page.js" })
-  .then(listenForClicks)
-  .catch(reportExecuteScriptError);
-
-// browser.tabs
-//   .sendMessage(tabs[0].id, {
-//     command: "getCoordinates",
-//   })
-//   .then((response) => {
-//     browser.tabs.sendMessage(tabs[0].id, {
-//       command: "flip",
-//       posX: response.coords[randNum].posX,
-//       posY: response.coords[randNum].posY,
-//     });
-//   });
-
-// function selectLocations(tabs) {
-//   browser.tabs.sendMessage(tabs[0].id, {
-//     command: "select",
-//   });
-// }
+listenForClicks();

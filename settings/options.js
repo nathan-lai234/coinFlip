@@ -1,7 +1,6 @@
 //Load images for coins
-document.getElementById("image_aus1").src = "/icons/aus1.png";
-document.getElementById("image_jap5").src = "/icons/jap5.png";
-document.getElementById("image_usa5").src = "/icons/usa5.png";
+document.getElementById("image_euro2").src = "/icons/euro2.png";
+document.getElementById("image_pesetas").src = "/icons/pesetas.png";
 
 //Default colour values
 const defaultHeadsColor = "0000ff";
@@ -143,7 +142,7 @@ function restoreOptions() {
 
   function setCointype(result) {
     if (result.cointypeId === null) {
-      document.getElementById("cointype_aus1").checked = true;
+      document.getElementById("cointype_euro2").checked = true;
     } else {
       document.getElementById(result.cointypeId).checked = true;
     }
@@ -190,5 +189,6 @@ document
 document
   .getElementById("coinface_color")
   .addEventListener("click", hideCointypeOptions);
+
 document.addEventListener("DOMContentLoaded", restoreOptions);
 document.querySelector("form").addEventListener("submit", saveOptions);

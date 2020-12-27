@@ -94,6 +94,10 @@ body {
   border-bottom-right-radius: 10px;
 }
 
+#animation_speed_wrapper {
+  display: flex;
+}
+
 #save_button {
   width: 80px;
   height: 30px;
