@@ -106,5 +106,9 @@ body {
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
-  float: right;
+}
+
+.submit_wrapper {
+  display: flex;
+  justify-content: space-between;
 }
